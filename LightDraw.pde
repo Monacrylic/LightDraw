@@ -15,6 +15,11 @@ float r = 255,g = 255,b = 255;
 boolean draw = false;
 boolean cam_on = false;
 
+void forecolor(){
+      r= random(0,255);
+      g = random(0,255);
+      b = random(0,255);
+}
 void colors(){
       red=random(0,255);
       green = random(0,255);
@@ -56,7 +61,7 @@ void setup() {
    controlP5.addButton("Save")
  .setValue(1)
  .setPosition(0,5)
- .setSize(65,30)
+ .setSize(70,30)
    .addCallback(new CallbackListener() {
       public void controlEvent(CallbackEvent event) {
         if (event.getAction() == ControlP5.ACTION_RELEASED) {
@@ -65,6 +70,20 @@ void setup() {
           controlP5.getController("Save").setCaptionLabel("Saving...");
           delay(500);
 controlP5.getController("Save").setCaptionLabel("Saved");
+    
+        }
+      }
+    }
+  );
+  
+   controlP5.addButton("Foreground")
+ .setValue(1)
+ .setPosition(90,height-30)
+ .setSize(70,30)
+   .addCallback(new CallbackListener() {
+      public void controlEvent(CallbackEvent event) {
+        if (event.getAction() == ControlP5.ACTION_RELEASED) {
+          forecolor();
     
         }
       }
@@ -111,7 +130,7 @@ void draw() {
      cam.read();
      cam.loadPixels();
      loadPixels();
-     maxBri = 230;
+     maxBri = 200;
     for(int i=0; i<cam.pixels.length; i++) {
       if(brightness(cam.pixels[i]) > maxBri) {
         maxBri = brightness(cam.pixels[i]);
